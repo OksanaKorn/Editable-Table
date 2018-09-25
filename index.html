@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <title>Table Editor</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>    
+    <div class="table-editable">
+        <aside id="info">This App allow you to create editable table from JSON.<br> Paste your JSON in text area below or upload in file.</aside>
+        <table class="table" id="table">
+            <thead class="hide" id="header">
+                <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                    <th></th>
+                    <th onClick="addNewRow()" id="addRow"><span class="table-add glyphicon glyphicon-plus"></span></th>
+                </tr>
+            </thead>
+            <div id="first-row-alert" class="alert alert-warning alert-dismissible fade in hide">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                It's first row, you can't push it higher
+            </div>
+            <tbody id="table-rows">
+                <tr class="hide" id="oneRow">
+                    <td contenteditable="true" class="name"></td>
+                    <td contenteditable="true" class="value"></td>
+                    <td>
+                        <span onClick="removeRow()" id="remove" class="table-remove glyphicon glyphicon-remove"></span>
+                    </td>
+                    <td>
+                        <span onClick="tableUp()" id="table-up" class="table-up glyphicon glyphicon-arrow-up"></span>
+                        <span onClick="tableDown()" id="table-down" class="table-down glyphicon glyphicon-arrow-down"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div id="last-row-alert" class="alert alert-warning alert-dismissible fade in hide">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            It's last row, you can't push it lower
+        </div>
+        <section class="controls">
+            <textarea rows="4" cols="70" placeholder='input your JSON data here. Required format: [{name:"name1, value="value1"}]' id="dataForTable"></textarea><br>
+            <div id="text-area-alert" class="alert alert-warning alert-dismissible fade in hide">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                First add JSON to textarea
+            </div>
+            <div id="wrong-format-alert" class="alert alert-warning alert-dismissible fade in hide">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                Wrong JSON input format. Required one: [{name:"name1, value="value1"}, ...]'
+            </div>
+            <button onClick="startTableCreating()" id="create-table-button" class="btn btn-primary">Add data from textarea</button><br>
+            <input type="file" id="json-file" size="50" onchange="handleFileSelect()"><br><br>
+
+            <button onClick="exportTableToCSV('data.csv')" id="export-button" class="btn btn-success hide">Export data as CSV</button>
+        </section>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>  
+</body>
+</html>
